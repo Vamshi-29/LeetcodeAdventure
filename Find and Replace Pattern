@@ -1,0 +1,35 @@
+Leetcode-890 (Medium)
+Question link : https://leetcode.com/problems/find-and-replace-pattern/description/
+
+Solution ( C++ ):
+class Solution {
+public:
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+     unordered_map<char,int>um;
+     int n=pattern.length();
+     for(int i=0;i<n;i++)
+     {
+         if(um.find(pattern[i])==um.end())
+         um[pattern[i]]=i;
+     }  
+    int n1=words.size();
+    unordered_map<char,int>um1;
+    vector<string>result;
+    for(int i=0;i<n1;i++)
+    {
+        string temp=words[i];
+        int j=0;
+        for(j=0;j<n;j++)
+        {
+            if(um1.find(temp[j])==um1.end())
+            um1[temp[j]]=j;
+            if(um1[temp[j]]!=um[pattern[j]])
+            break;
+        }
+        if(j==n)
+        result.push_back(temp);
+        um1.clear();
+    }
+    return result;
+    }
+};
