@@ -5,17 +5,17 @@ public:
         sort(grades.begin(),grades.end());
         int sum=grades[0];
         int temp=1,cnt=1,locsum=0;
-        vector<int>loctemp;
+        int loccnt=0;
         for(int i=1;i<n;i++)
         {
             locsum+=grades[i];
-            loctemp.push_back(grades[i]);
-            if(loctemp.size() > temp && locsum > sum)
+            loccnt++;
+            if(loccnt > temp && locsum > sum)
             {
                 sum=locsum;
                 locsum=0;
-                temp=loctemp.size();
-                loctemp.clear();
+                temp=loccnt;
+                loccnt=0;
                 cnt++;
             }
         }
