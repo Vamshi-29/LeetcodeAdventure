@@ -11,16 +11,13 @@ public:
                 {
                     um.erase(trust[i][0]);
                 }
-                 if(um.find(trust[i][1])!=um.end())
-                    um[trust[i][1]]++;
+                //  if(um.find(trust[i][1])!=um.end())
+                //     um[trust[i][1]]++;
             
         }
-        // cout<<um.size()<<endl;
-        // if(um.size()==0)
-        // return -1;
         for(auto i:um)
         {
-            if(i.second==n-1)
+            // if(i.second==n-1)
             return i.first;
         }
         return -1;
