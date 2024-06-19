@@ -16,11 +16,16 @@ bool check(const string& prev, const string& curr) {
         }
         else
         {
+            cnt++;
             start2++;
         }
     }
-    if(start1==n)
-    return 1;
+    if(start1==n){
+        if(cnt==0)
+        return 1;
+        if(cnt==1)
+        return 1;
+    }
     return 0;
 }
 int getsol(vector<string>& words, int prev, int index, int n, vector<vector<int>>& memo) {
@@ -42,6 +47,8 @@ int longestStrChain(vector<string>& words) {
     sort(words.begin(), words.end(), [](string& a, string& b) {
         return a.size() < b.size();
     });
+    for(int i=0;i<n;i++)
+    cout<<words[i]<<" ";
     vector<vector<int>> memo(n + 1, vector<int>(n+1, -1));
     return getsol(words, -1, 0, n, memo);
 }
