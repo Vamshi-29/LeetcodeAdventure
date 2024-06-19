@@ -21,7 +21,7 @@ bool check(const string& prev, const string& curr) {
         }
     }
     if(start1==n){
-        if(cnt==0)
+        if(cnt==0 && start2==m-1)
         return 1;
         if(cnt==1)
         return 1;
