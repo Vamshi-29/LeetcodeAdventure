@@ -2,15 +2,26 @@ class Solution {
 public:
 
 bool check(const string& prev, const string& curr) {
-    if (curr.size() != prev.size() + 1) return false;
-    int i = 0, j = 0;
-    while (i < prev.size() && j < curr.size()) {
-        if (prev[i] == curr[j]) {
-            i++;
+    int n=prev.length();
+    int m=curr.length();
+    if(n+1!=m)
+    return false;
+    int start1=0,start2=0,cnt=0;
+    while(start1<n && start2<m)
+    {
+        if(prev[start1]==curr[start2])
+        {
+            start1++;
+            start2++;
         }
-        j++;
+        else
+        {
+            start2++;
+        }
     }
-    return i == prev.size(); 
+    if(start1==n)
+    return 1;
+    return 0;
 }
 int getsol(vector<string>& words, int prev, int index, int n, vector<vector<int>>& memo) {
     if (index >= n)
