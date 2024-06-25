@@ -1,24 +1,23 @@
 class Solution {
 public:
-    int jump(vector<int>& nums) {
-        int n=nums.size()-1;
-        int maxi=0,cnt=0,i=0;
-        if(n==0)
-        return 0;
-        while(i<=n)
-        {
-            if(nums[i]+i>maxi)
-            {
-                maxi=nums[i]+i;
-                cnt++;
-            }
-            if(maxi>=n)
-            return cnt;
-            // if(nums[i]==0)
-            // cnt--;
-            i++;
-        }
-        return cnt;
+    int getsol(vector<int>& nums, int index, vector<int>& dp) {
+        if (index >= nums.size() - 1)
+            return 0;
 
+        if (dp[index] != -1)
+            return dp[index];
+
+        int mini = 1e9;
+        for (int i = index + 1; i <= index + nums[index] && i < nums.size(); i++) {
+            mini = min(mini, 1 + getsol(nums, i, dp));
+        }
+
+        return dp[index] = mini;
+    }
+
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> dp(n, -1);
+        return getsol(nums, 0, dp);
     }
 };
