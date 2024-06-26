@@ -11,21 +11,21 @@
  */
 class Solution {
 public:
-    bool getsol(TreeNode* node1,TreeNode* node2)
-    {
-        if(node1==nullptr && node2==nullptr)
-        return true;
-        if(node1==nullptr || node2==nullptr)
-        return false;
-        if(node1->val != node2->val)
-        return false;
-    
-        bool ans1=getsol(node1->left,node2->right);
-        bool ans2=getsol(node1->right,node2->left);
-        return ans1 && ans2;
-
+    bool check(TreeNode *leftie, TreeNode *rightie) {
+        if (leftie == nullptr && rightie == nullptr)
+            return true;
+        if (leftie == nullptr || rightie == nullptr)
+            return false;
+        if (leftie->val != rightie->val)
+            return false;
+        bool left1 = check(leftie->left, rightie->right);
+        bool right1 = check(leftie->right, rightie->left);
+        return left1 && right1;
     }
+
     bool isSymmetric(TreeNode* root) {
-        return getsol(root->left,root->right);
+        if (root == nullptr)
+            return true;
+        return check(root->left, root->right);
     }
 };
