@@ -1,36 +1,7 @@
 class Solution {
 public:
-    bool cankeep(int row,int col,vector<string>board,vector<vector<string>>ans,int n)
-    {   
-        int duprow=row;
-        int dupcol=col;
-        while(row>=0 && col>=0)
-        {
-            if(board[row][col]=='Q')
-            return false;
-            row--;
-            col--;
-        }
-        row=duprow;
-        col=dupcol;
-        while(col>=0)
-        {
-            if(board[row][col]=='Q')
-            return false;
-            col--;
-        }
-        row=duprow;
-        col=dupcol;
-        while(row<n && col>=0)
-        {
-            if(board[row][col]=='Q')
-            return false;
-            row++;
-            col--;
-        }
-        return true;
-    }
-    void getans(int col,vector<string>&board,vector<vector<string>>&ans,int n)
+    vector<vector<string>>ans;
+    void nqueens(int col,int n,vector<int>&left,vector<int>&ld,vector<int>&ud,vector<string>&board)
     {
         if(col==n)
         {
@@ -39,18 +10,26 @@ public:
         }
         for(int row=0;row<n;row++)
         {
-            if(cankeep(row,col,board,ans,n))
+            if(left[row]==0 && ld[row+col]==0 && ud[n-1+col-row]==0)
             {
                 board[row][col]='Q';
-                getans(col+1,board,ans,n);
+                left[row]=1;
+                ld[row+col]=1;
+                ud[n-1+col-row]=1;
+                nqueens(col+1,n,left,ld,ud,board);
                 board[row][col]='.';
+                left[row]=0;
+                ld[row+col]=0;
+                ud[n-1+col-row]=0;
             }
         }
     }
     vector<vector<string>> solveNQueens(int n) {
-      vector<string> board(n, string(n, '.')); 
-       vector<vector<string>>ans;
-       getans(0,board,ans,n);
-       return ans;
+     vector<string>board(n,string(n,'.'));
+     vector<int>left(n);
+     vector<int>ld(2*n-1);
+     vector<int>ud(2*n-1);
+     nqueens(0,n,left,ld,ud,board);
+     return ans;
     }
 };
