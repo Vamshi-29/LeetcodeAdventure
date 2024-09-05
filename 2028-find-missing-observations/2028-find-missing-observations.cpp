@@ -14,16 +14,18 @@ public:
         return {};
         for(int i=1;i<=n;i++)
         {
-            for(int j=6;j>=1;j--)
-            {
-                if(reqsum-j +1 >= cnt){
+            for(int j=1;j<=6;j++){
+                if(reqsum-j <= (cnt-1)*6)
+                {
                     reqsum=reqsum-j;
-                    cnt--;
                     ans.push_back(j);
+                    cnt--;
                     break;
                 }
-            }
+            }       
         }
+        if(reqsum==0)
         return ans;
+        return {};
     }
 };
