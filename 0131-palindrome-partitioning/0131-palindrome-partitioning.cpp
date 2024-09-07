@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool validparti(string str)
+    bool ispalindrome(string str)
     {
         int start=0,end=str.length()-1;
         while(start<=end)
@@ -12,7 +12,8 @@ public:
         }
         return true;
     }
-    void palinpartion(string s,int index,int n,vector<vector<string>>&fans,vector<string>&temp)
+    vector<vector<string>>fans;
+    void getans(string s,int index,int n,vector<string>&temp)
     {
         if(index==n)
         {
@@ -23,18 +24,17 @@ public:
         for(int i=index;i<n;i++)
         {
             str=str+s[i];
-            if(validparti(str)){
-            temp.push_back(str);
-            palinpartion(s,i+1,n,fans,temp);
-            temp.pop_back();
+            if(ispalindrome(str))
+            {
+                temp.push_back(str);
+                getans(s,i+1,n,temp);
+                temp.pop_back();
             }
         }
-        
     }
     vector<vector<string>> partition(string s) {
         vector<string>temp;
-        vector<vector<string>>fans;
-        palinpartion(s,0,s.length(),fans,temp);
+        getans(s,0,s.length(),temp);
         return fans;
     }
 };
