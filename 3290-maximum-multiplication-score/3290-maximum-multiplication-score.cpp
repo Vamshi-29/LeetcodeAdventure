@@ -1,29 +1,27 @@
 class Solution {
 public:
-    long long solve(int index, int length, vector<int>& a, vector<int>& b, int n, vector<vector<long long>>& dp) {
-        // Base cases
-        if (length == 4)
+    long long ans(vector<int>& a, vector<int>& b, int start1, int start2, int blen, vector<vector<long long>>& dp) {
+        if (start1 == 4) {
             return 0;
-        if (index == n)
-            return INT_MIN;
+        }
+        if (start2 >= blen) {
+            return -1e9;
+        }
+        if (dp[start1][start2] != -1) {
+            return dp[start1][start2];
+        }
 
-        // Check if already computed
-        if (dp[index][length] != -1)
-            return dp[index][length];
+        long long fans = LLONG_MIN;
+        for (int i = start2; i < blen; i++) {
+            long long tempans = ans(a, b, start1 + 1, i + 1, blen, dp) + (long long)(a[start1] * (long long)b[i]);
+            fans = max(fans, tempans);
+        }
 
-        // Option 1: Not pick the current element
-        long long notPick = solve(index + 1, length, a, b, n, dp);
-
-        // Option 2: Pick the current element
-        long long pick = (long long)a[length] * b[index] + solve(index + 1, length + 1, a, b, n, dp);
-
-        // Store and return the maximum of the two options
-        return dp[index][length] = max(pick, notPick);
+        return dp[start1][start2] = fans;
     }
 
     long long maxScore(vector<int>& a, vector<int>& b) {
-        int n = b.size();
-        vector<vector<long long>> dp(n, vector<long long>(4, -1));
-        return solve(0, 0, a, b, n, dp);
+        vector<vector<long long>> dp(a.size(), vector<long long>(b.size(), -1));
+        return ans(a, b, 0, 0, b.size(), dp);
     }
 };
