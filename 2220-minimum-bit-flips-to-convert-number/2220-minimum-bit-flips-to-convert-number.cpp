@@ -4,10 +4,8 @@ public:
         int cnt=0;
         for(int i=0;i<=31;i++)
         {
-            int bit1=start&(1<<i);
-            int bit2=goal&(1<<i);
-            if(bit1!=bit2)
-            cnt++;
+           if( start&(1<<i) ^ (goal&(1<<i)))
+           cnt++;
         }
         return cnt;
     }
