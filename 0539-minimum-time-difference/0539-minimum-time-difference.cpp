@@ -14,15 +14,15 @@ public:
             ans.push_back(total);
         }
         sort(ans.begin(),ans.end());
+        for(auto it:ans)
+        cout<<it<<" ";
         int fans=INT_MAX;
         for(int i=1;i<n;i++)
         {
             int diff1=abs(ans[i]-ans[i-1]);
-            int diff2=abs(ans[i-1]-ans[i]);
-            int mindiff=min(diff1,diff2);
-            fans=min(fans,mindiff);
+            fans=min(fans,diff1);
         }
-        return fans;
+        return min(fans, abs(ans[n - 1] - (ans[0] + 1440)));
 
     }
 };
