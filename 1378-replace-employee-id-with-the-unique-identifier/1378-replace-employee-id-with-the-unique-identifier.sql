@@ -1,4 +1,5 @@
-select 
-EmployeeUNI.unique_id,Employees.name 
-from Employees
-left join EmployeeUNI on Employees.id=EmployeeUNI.id
+# Write your MySQL query statement below
+
+select unique_id,name from 
+EmployeeUNI right join 
+Employees on EmployeeUNI.id=Employees.id
