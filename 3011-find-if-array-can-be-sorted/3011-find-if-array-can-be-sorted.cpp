@@ -1,34 +1,33 @@
 class Solution {
 public:
-    bool set(int a,int b)
-    {
+    int samebits(int num){
         int cnt=0;
-        while(a)
+        while(num)
         {
-            cnt+= a&1;
-            a=a>>1;
+            if(num&1)
+            cnt++;
+            num=num/2;
         }
-        while(b)
-        {
-            cnt-=b&1;
-            b=b>>1;
-        }
-        return !cnt;
+        return cnt;
     }
     bool canSortArray(vector<int>& nums) {
         int n=nums.size();
-        for(int i=0;i<n-1;i++)
+        for(int i=0;i<n;i++)
         {
-            for(int j=0;j<n-1-i;j++)
+            for(int j=0;j<n-1;j++)
             {
-                if(nums[j]>nums[j+1] && set(nums[j],nums[j+1]))
+                if(nums[j]>nums[j+1] && samebits(nums[j])==samebits(nums[j+1]))
+                {
                     swap(nums[j],nums[j+1]);
+                }
             }
         }
-        for(int i=1;i<n;i++)
+        for(auto it:nums)
+        cout<<it<<" ";
+        for(int i=0;i<n-1;i++)
         {
-            if(nums[i]<nums[i-1])
-                return  false;
+            if(nums[i]>nums[i+1])
+            return false;
         }
         return true;
     }
