@@ -22,7 +22,7 @@ int getsol(string word1,string word2,int end1,int end2,vector<vector<int>>&dp)
     int minDistance(string word1, string word2) {
         int n=word1.length();
         int m=word2.length();
-        vector<vector<int>>dp(n,vector<int>(n,-1));
+        vector<vector<int>>dp(n,vector<int>(m,-1));
         return getsol(word1,word2,n-1,m-1,dp);
     }
     
