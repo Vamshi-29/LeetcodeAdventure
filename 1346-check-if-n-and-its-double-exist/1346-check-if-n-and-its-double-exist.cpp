@@ -2,12 +2,13 @@ class Solution {
 public:
     bool checkIfExist(vector<int>& arr) {
         unordered_map<int,int>um;
-        int n=arr.size();
-        for(int i=0;i<n;i++)
-        um[arr[i]]=i;
-        for(int i=0;i<n;i++)
+        for(auto it:arr)
         {
-            if(um.find(2*arr[i])!=um.end() && um[2*arr[i]]!=i)
+            um[it]++;
+        }
+        for(auto it:arr)
+        {
+            if(um.find(2*it)!=um.end() && it!=0)
             return true;
         }
         return false;
