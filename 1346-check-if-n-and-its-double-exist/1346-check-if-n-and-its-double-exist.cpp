@@ -8,6 +8,8 @@ public:
         }
         for(auto it:arr)
         {
+            if(it==0 && um[0]>=2)
+            return true;
             if(um.find(2*it)!=um.end() && it!=0)
             return true;
         }
