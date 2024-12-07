@@ -1,13 +1,16 @@
 class Solution {
 public:
      int getsol(vector<int> nums, int maxop, int midder) {
-        for (auto it : nums) {
-            if (it > midder) {
-                maxop -= (it - 1) / midder;
-            }
-            if (maxop < 0)
-                return false;
+    for (auto it : nums) {
+    if (it > midder) {
+        if (it % midder == 0) {
+            maxop -= (it / midder - 1); 
+        } else {
+            maxop -= (it / midder); 
         }
+        if (maxop < 0) return false; 
+    }
+}
         return true;
     }
     int minimumSize(vector<int>& nums, int maxOperations) {
