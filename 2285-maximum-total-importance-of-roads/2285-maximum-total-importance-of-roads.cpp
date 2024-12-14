@@ -1,21 +1,20 @@
 class Solution {
-    public long maximumImportance(int n, int[][] roads) {
-        int[] br = new int[n];
-        for(int[] r : roads){
-            br[r[0]]++;
-            br[r[1]]++;
+public:
+    long long maximumImportance(int n, vector<vector<int>>& roads) {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
+
+        vector<long long> deg(n, 0);
+        for (auto &a : roads) {
+            deg[a[0]]++;
+            deg[a[1]]++;
         }
-        int[] cnt = new int[n];
-        for(int b : br){
-            cnt[b]++;
+        sort(deg.begin(), deg.end());
+        long long ans = 0;
+        for (long long i=0;i<n;i++) {
+            ans += ( (i+1)*deg[i] );
         }
-        long sum = 0;
-        long val = 1;
-        for(long i = 0; i < n; i++){
-            for(int j = 0; j < cnt[(int)i]; j++){
-                sum += i*val++;
-            }
-        }
-        return sum;
+        return ans;
     }
-}
+};
