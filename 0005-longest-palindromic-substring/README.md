@@ -20,6 +20,6 @@
 <p><strong>Constraints:</strong></p>
 
 <ul>
-	<li><code>1 &lt;= s.length &lt;= 1000</code></li>
+	<li><prom>1 &lt;= s.length &lt;= 1000</prom></li>
 	<li><code>s</code> consist of only digits and English letters.</li>
 </ul>
